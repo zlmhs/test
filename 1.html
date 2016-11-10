@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				-webkit-perspective: 950;
+				-webkit-perspective-origin: 50% 480px;
+				transform-style: preserve-3d;
+			}
+			#space{
+				width: 1900px;
+				height: 950px;
+				position: absolute;
+				top: 5px;
+				left: 50%;
+				margin-left: -950px;
+				transform: rotateY(0deg);
+				transform-style: preserve-3d;
+			}
+			#floor{
+				width: 3000px;
+				height: 3000px;
+				position: absolute;
+				background-color: #FEBC66;
+				background: url(http://zurb.com/playground/uploads/upload/upload/87/wood-bg.jpg);
+				transform: rotateX(90deg);
+				margin: -550px 0 0 -550px;
+			}
+			.wall{
+				box-sizing: border-box;
+				width: 3100px;
+				height: 950px;
+				position: absolute;
+				transform-style: preserve-3d;
+				margin: 0 0 0 -600px;
+				background: #e6e6e6;
+				transition: background 2s;
+			}
+			.wall>img{
+				display: block;
+				width: 1568px;
+				height: 800px;
+				border: 25px solid #000000;
+				margin: 50px auto;
+				cursor: pointer;
+			}
+			#east{
+				transform: translateX(1500px) rotateY(-90deg);
+			}
+			#west{
+				transform: translateX(-1500px) rotateY(90deg);
+			}
+			#south{
+				transform: translateZ(-1500px);
+			}
+			#north{
+				transform: translateZ(1500px) rotateY(180deg);
+			}
+			.wall_shadow{
+				background: #6e6e6e;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="space">
+			<div id="floor">
+				
+			</div>
+			<div id="east" class="wall">
+				<img src="http://ossweb-img.qq.com/images/lol/web201310/skin/big32000.jpg"/>
+			</div>
+			<div id="south" class="wall">
+				<img src="http://ossweb-img.qq.com/images/lol/web201310/skin/big22000.jpg"/>
+			</div>
+			<div id="west" class="wall">
+				<img src="http://ossweb-img.qq.com/images/lol/web201310/skin/big157000.jpg"/>
+			</div>
+			<div id="north" class="wall">
+				<img src="http://ossweb-img.qq.com/images/lol/web201310/skin/big37000.jpg"/>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var herosImg=[
+				{name:"寒冰射手",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Ashe.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big22000.jpg"},
+				{name:"德玛西亚之力",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Garen.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big86000.jpg"},
+				{name:"无极剑圣",icon:"http://ossweb-img.qq.com/images/lol/img/champion/MasterYi.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big11000.jpg"},
+				{name:"暗裔剑魔",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Aatrox.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big266000.jpg"},
+				{name:"九尾妖狐",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Ahri.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big103000.jpg"},
+				{name:"暗影之拳",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Akali.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg"},
+				{name:"牛头酋长",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Alistar.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big12000.jpg"},
+				{name:"殇之木乃伊",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Amumu.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big32000.jpg"},
+				{name:"冰晶凤凰",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Anivia.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big34000.jpg"},
+				{name:"黑暗之女",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Annie.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big1000.jpg"},
+				{name:"铸星龙王",icon:"http://ossweb-img.qq.com/images/lol/img/champion/AurelionSol.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big136000.jpg"},
+				{name:"沙漠皇帝",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Azir.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big268000.jpg"},
+				{name:"星界游神",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Bard.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big432000.jpg"},
+				{name:"蒸汽机器人",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Blitzcrank.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big53000.jpg"},
+				{name:"复仇焰魂",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Brand.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big63000.jpg"},
+				{name:"弗雷尔卓德之心",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Braum.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big201000.jpg"},
+				{name:"皮城女警",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Caitlyn.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big51000.jpg"},
+				{name:"魔蛇之拥",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Cassiopeia.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big69000.jpg"},
+				{name:"虚空恐惧",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Chogath.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big31000.jpg"},
+				{name:"英勇投弹手",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Corki.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big42000.jpg"},
+				{name:"诺克萨斯之手",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Darius.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big122000.jpg"},
+				{name:"皎月女神",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Diana.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big131000.jpg"},
+				{name:"荣耀行刑官",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Draven.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big119000.jpg"},
+				{name:"祖安狂人",icon:"http://ossweb-img.qq.com/images/lol/img/champion/DrMundo.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big36000.jpg"},
+				{name:"时间刺客",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Ekko.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big245000.jpg"},
+				{name:"蜘蛛女皇",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Elise.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big60000.jpg"},
+				{name:"寡妇制造者",icon:"http://ossweb-img.qq.com/images/lol/img/champion/Evelynn.png",
+				imgs:"http://ossweb-img.qq.com/images/lol/web201310/skin/big28000.jpg"}
+			];
+			var box=document.getElementById("space");
+			var east=document.getElementById("east"),west=document.getElementById("west"),
+				south=document.getElementById("south"),north=document.getElementById("north");
+			var rx=0,cx;
+			var isMouseDown=false;
+			window.onload=function () {
+				boxShadow();
+				drawImg();
+			}
+			document.onmousedown=function (eve) {
+				var e=eve||window.event;
+				if (e.button==0||window.event.button==1) {
+					isMouseDown=true;
+				}
+			}
+			document.onmouseup=function (eve) {
+				var e=eve||window.event;
+				if (e.button==0||window.event.button==1) {
+					isMouseDown=false;
+				}
+			}
+			document.onmousemove=function (eve) {
+				var e=eve||window.event;
+				if (isMouseDown) {
+					rx-=e.clientX-cx;
+					if (rx>=360) {
+						rx=0;
+					}
+					if (rx<0) {
+						rx=359;
+					}
+					cx=e.clientX;
+					box.style.transform="rotateY("+rx+"deg)";
+					boxShadow();
+				} else {
+					cx=e.clientX;
+				}
+			}
+			function boxShadow () {
+				if ((rx>=0&&rx<45)||(rx>=315&&rx<360)) {
+					east.className="wall wall_shadow"
+					west.className="wall wall_shadow"
+					south.className="wall"
+					north.className="wall wall_shadow"
+				} else if (rx>=45&&rx<135){
+					east.className="wall"
+					west.className="wall wall_shadow"
+					south.className="wall wall_shadow"
+					north.className="wall wall_shadow"
+				} else if (rx>=135&&rx<225) {
+					east.className="wall wall_shadow"
+					west.className="wall wall_shadow"
+					south.className="wall wall_shadow"
+					north.className="wall"
+				} else if (rx>=225&&rx<315) {
+					east.className="wall wall_shadow"
+					west.className="wall"
+					south.className="wall wall_shadow"
+					north.className="wall wall_shadow"
+				}
+			}
+			function drawImg () {
+				var finds=[];
+				finds=getNums(herosImg.length,4);
+				east.getElementsByTagName('img')[0].src=herosImg[finds[0]].imgs;
+				west.getElementsByTagName('img')[0].src=herosImg[finds[1]].imgs;
+				south.getElementsByTagName('img')[0].src=herosImg[finds[2]].imgs;
+				north.getElementsByTagName('img')[0].src=herosImg[finds[3]].imgs;
+				setTimeout(drawImg,2500);
+			}
+			function getNums (max,n) {
+				var nums1=[],nums2=[];
+				for (var i = 0; i < max; i++) {
+					nums2.push(i);
+				}
+				for (var i=0; i<n; i++) {
+					var x=Math.floor(Math.random()*nums2.length);
+					nums1.push(nums2[x]);
+					nums2.splice(x,1);
+				}
+				return nums1;
+			}
+		</script>
+	</body>
+</html>
